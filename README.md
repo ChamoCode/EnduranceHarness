@@ -1,4 +1,4 @@
-# TARS — Spec-driven harness for cooperative AI agent teams
+# R2D2-Harness — Spec-driven harness for cooperative AI agent teams
 
 > *Cooperative agents. Spec before launch. Trust, but verify.*
 
@@ -6,9 +6,10 @@ Plantilla **Harness Engineering** dockerizada para **clonar y arrancar productos
 con agentes de IA, Spec Driven Development (SDD) y ciclo de vida completo en **Docker /
 Docker Compose**.
 
-Como su homónimo de *Interstellar*, cada agente tiene un rol acotado y fiable; el
-**leader** coordina la misión sin implementar. Cada feature empieza con un **briefing**
-(spec), pausa para **aprobación humana**, y solo entonces toca código.
+Como su homónimo de *Star Wars*, el astromech que mantiene la misión en marcha: cada
+agente tiene un rol acotado y fiable; el **leader** coordina sin implementar. Cada
+feature empieza con un **briefing** (spec), pausa para **aprobación humana**, y solo
+entonces toca código.
 
 Este repositorio es el **arnés vacío** (specs, progress, agentes, docker).
 Al clonarlo creas un repo donde el **producto crece dentro de la misma
@@ -26,9 +27,11 @@ y detiene desde contenedores.
 1. **Clona** esta plantilla en un repo nuevo:
 
    ```bash
-   git clone <url-de-esta-plantilla> mi-producto
+   git clone https://github.com/ChamoCode/R2D2-Harness.git mi-producto
    cd mi-producto
    ```
+
+   O usa el botón **Use this template** en [GitHub](https://github.com/ChamoCode/R2D2-Harness).
 
 2. **Pre-flight checks** — verifica el entorno:
 

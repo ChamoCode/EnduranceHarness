@@ -1,6 +1,6 @@
 {
-  "project": "harness-template",
-  "description": "Plantilla Harness Engineering dockerizada. Clona este repo para iniciar un producto nuevo: el codigo crece in-repo en product/ y tests/, con SDD y ciclo Docker (build, test, up, down). Al clonar, reemplaza feature_list.json con el backlog de tu producto.",
+  "project": "r2d2-harness",
+  "description": "R2D2-Harness: plantilla Harness Engineering dockerizada. Clona este repo para iniciar un producto nuevo: el codigo crece in-repo en product/ y tests/, con SDD y ciclo Docker (build, test, up, down). Al clonar, reemplaza feature_list.json con el backlog de tu producto.",
   "rules": {
     "one_feature_at_a_time": true,
     "require_tests_to_close": true,

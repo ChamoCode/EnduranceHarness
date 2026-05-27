@@ -1,10 +1,10 @@
-# AGENTS.md — Mapa de navegación para agentes (TARS)
+# AGENTS.md — Mapa de navegación para agentes (R2D2-Harness)
 
-> Punto de entrada del arnés TARS. Lee solo lo que necesites (divulgación progresiva).
+> Punto de entrada del arnés R2D2-Harness. Lee solo lo que necesites (divulgación progresiva).
 > *Cooperative agents. Spec before launch. Trust, but verify.*
 
-TARS es un arnés SDD: el **leader** coordina especialistas; cada feature es una misión
-con briefing (spec), go/no-go humano, y payload en `product/`.
+R2D2-Harness es un arnés SDD: el **leader** coordina especialistas; cada feature es una
+misión con briefing (spec), go/no-go humano, y payload en `product/`.
 
 ---
 
@@ -16,8 +16,8 @@ con briefing (spec), go/no-go humano, y payload en `product/`.
 3. Lee `feature_list.json` (mission log). Features con `"sdd": true` siguen SDD — ver `docs/specs.md`.
 4. Lee `docs/specs.md` antes de redactar o implementar un spec.
 
-**Nueva misión:** clona esta plantilla, usa `skills/feature-list/SKILL.md` para
-el backlog y arranca SDD. Ver [`README.md`](README.md).
+**Nueva misión:** clona esta plantilla desde [github.com/ChamoCode/R2D2-Harness](https://github.com/ChamoCode/R2D2-Harness),
+usa `skills/feature-list/SKILL.md` para el backlog y arranca SDD. Ver [`README.md`](README.md).
 
 ## 2. Mapa del repositorio
 
@@ -39,13 +39,13 @@ el backlog y arranca SDD. Ver [`README.md`](README.md).
 | `docker/` | Dockerfiles, compose, scripts | Infra y producto |
 | `init.sh` / `init.ps1` | Pre-flight checks del host | Inicio y cierre |
 | `docker/scripts/verify.sh` | Validación del arnés | Cierre y CI |
-| `.claude/agents/` | Crew / especialistas de misión (ver tabla abajo) | Orquestación |
+| `.claude/agents/` | Astromech crew / especialistas (ver tabla abajo) | Orquestación |
 
 ### Agentes en `.claude/agents/`
 
-| Agente | Rol | En misión TARS |
-|--------|-----|----------------|
-| `leader` | Orquesta; no implementa | Mission control |
+| Agente | Rol | En misión |
+|--------|-----|-----------|
+| `leader` | Orquesta; no implementa | Flight control |
 | `spec_author` | Specs EARS | Redacta el briefing |
 | `backend_implementer` | Implementa `product/backend/` | Especialista payload backend |
 | `frontend_implementer` | Implementa `product/frontend/` | Especialista payload frontend |
@@ -83,14 +83,14 @@ pending → [spec_author] → spec_ready → ⏸ HUMANO → in_progress
 - Relee `docs/` o `skills/` relevante.
 - Documenta el bloqueo en `progress/current.md` y para.
 
-## Glosario TARS (vocabulario; paths sin cambiar)
+## Glosario R2D2-Harness (vocabulario; paths sin cambiar)
 
-| Término TARS | En el repo |
-|--------------|------------|
-| Mission log | `feature_list.json` |
+| Término | En el repo |
+|---------|------------|
+| Flight plan / mission log | `feature_list.json` |
 | Briefing | `specs/<feature>/` |
 | Go/no-go | Aprobación humana en `spec_ready` |
 | Payload | `product/` + `tests/` |
 | Pre-flight | `init.sh`, `init.ps1`, `verify.sh` |
-| Mission control | Agente `leader` |
-| Crew | Subagentes en `.claude/agents/` |
+| Flight control | Agente `leader` |
+| Astromech crew | Subagentes en `.claude/agents/` |

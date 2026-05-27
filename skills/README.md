@@ -1,7 +1,7 @@
-# Skills del arnés
+# Skills del arnés R2D2-Harness
 
 Habilidades reutilizables para agentes que trabajan en esta plantilla Harness
-Engineering. Léelas cuando el humano pida crear backlog, agentes o ampliar el
+Engineering ([R2D2-Harness](https://github.com/ChamoCode/R2D2-Harness)). Léelas cuando el humano pida crear backlog, agentes o ampliar el
 equipo de subagentes.
 
 | Skill | Cuándo usarla |
