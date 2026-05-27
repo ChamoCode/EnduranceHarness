@@ -1,0 +1,99 @@
+{
+  "project": "harness-template",
+  "description": "Plantilla Harness Engineering dockerizada. Clona este repo para iniciar un producto nuevo: el codigo crece in-repo en product/ y tests/, con SDD y ciclo Docker (build, test, up, down). Al clonar, reemplaza feature_list.json con el backlog de tu producto.",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"],
+    "sdd_required_when": "feature has \"sdd\": true"
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "harness_cleanup",
+      "title": "Eliminar producto embebido",
+      "description": "Quitar src/, tests/, specs CLI y artefactos de progreso del notes-cli. Resetear progress/current.md y actualizar .gitignore.",
+      "acceptance": [
+        "No existen src/, tests/ ni specs/cli_*",
+        "Eliminados progress/impl_*, progress/review_*, progress/explore_*",
+        "progress/current.md contiene solo la plantilla vacía",
+        "progress/history.md tiene entrada de cierre del proyecto notes-cli",
+        ".gitignore actualizado para entorno Docker (.env, no .notes.json)"
+      ],
+      "sdd": true,
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "name": "docker_scaffold",
+      "title": "Scaffold Docker del arnés",
+      "description": "Crear docker/ con Dockerfile.harness, docker-compose.yml, .env.example y scripts build/verify/shell.",
+      "acceptance": [
+        "Existe docker/Dockerfile.harness con git, gh, python3, docker-cli",
+        "Existe docker/docker-compose.yml con servicio harness y socket montado",
+        "Existe docker/scripts/verify.sh con validación feature_list y archivos base",
+        "Existe docker/scripts/build.sh y docker/scripts/shell.sh",
+        "Existe docker/.env.example con PRODUCT_PATH y GITHUB_EXPECTED_USER"
+      ],
+      "sdd": true,
+      "status": "done"
+    },
+    {
+      "id": 3,
+      "name": "init_host_checks",
+      "title": "Init dual host (bash + PowerShell)",
+      "description": "Reescribir init.sh y crear init.ps1: detectar SO, verificar Docker, Git, gh auth, archivos base y delegar verify al contenedor.",
+      "acceptance": [
+        "init.sh detecta SO (linux, macos, windows-bash) y verifica Docker, Git, gh auth",
+        "init.ps1 equivalente para PowerShell nativo en Windows",
+        "Ambos delegan verificación a docker compose run harness verify",
+        "No requieren python3 en el host"
+      ],
+      "sdd": true,
+      "status": "done"
+    },
+    {
+      "id": 4,
+      "name": "docker_manager_agent",
+      "title": "Agente docker_manager",
+      "description": "Nuevo subagente para gestionar Dockerfiles, compose y scripts. Integración en leader, CLAUDE.md y hooks.",
+      "acceptance": [
+        "Existe .claude/agents/docker_manager.md con responsabilidades y límites",
+        "leader.md y CLAUDE.md referencian docker_manager",
+        ".claude/settings.json usa docker compose verify en hooks"
+      ],
+      "sdd": true,
+      "status": "done"
+    },
+    {
+      "id": 5,
+      "name": "harness_docs",
+      "title": "Documentación del arnés dockerizado",
+      "description": "README solo estructura, AGENTS.md, docs/*, CHECKPOINTS y reviewer adaptados al arnés sin producto.",
+      "acceptance": [
+        "README.md describe solo estructura del arnés dockerizado",
+        "docs/architecture.md, conventions.md, verification.md reescritos",
+        "Existe docs/docker.md para montaje de producto externo",
+        "AGENTS.md y CHECKPOINTS.md actualizados",
+        "reviewer.md adaptado para trazabilidad vía verify.sh"
+      ],
+      "sdd": true,
+      "status": "done"
+    },
+    {
+      "id": 6,
+      "name": "product_scaffold",
+      "title": "Scaffold producto in-repo",
+      "description": "Convencion product/ + tests/, Dockerfile.product, servicios app/test en compose, scripts product-build/test/up/down y docs alineados.",
+      "acceptance": [
+        "Existen product/ y tests/ con .gitkeep",
+        "Existe docker/Dockerfile.product y scripts product-*.sh",
+        "docker-compose.yml tiene servicios app y test con perfil product",
+        "README y docs/docker.md describen flujo clonar plantilla y producto in-repo"
+      ],
+      "sdd": true,
+      "status": "done"
+    }
+  ]
+}
