@@ -1,8 +1,14 @@
-# harness-template — Plantilla Harness Engineering dockerizada
+# TARS — Spec-driven harness for cooperative AI agent teams
 
-Plantilla para **clonar y arrancar productos nuevos** con agentes de IA,
-Spec Driven Development (SDD) y ciclo de vida completo en **Docker /
+> *Cooperative agents. Spec before launch. Trust, but verify.*
+
+Plantilla **Harness Engineering** dockerizada para **clonar y arrancar productos nuevos**
+con agentes de IA, Spec Driven Development (SDD) y ciclo de vida completo en **Docker /
 Docker Compose**.
+
+Como su homónimo de *Interstellar*, cada agente tiene un rol acotado y fiable; el
+**leader** coordina la misión sin implementar. Cada feature empieza con un **briefing**
+(spec), pausa para **aprobación humana**, y solo entonces toca código.
 
 Este repositorio es el **arnés vacío** (specs, progress, agentes, docker).
 Al clonarlo creas un repo donde el **producto crece dentro de la misma
@@ -24,14 +30,14 @@ y detiene desde contenedores.
    cd mi-producto
    ```
 
-2. **Verifica** el entorno:
+2. **Pre-flight checks** — verifica el entorno:
 
    ```bash
    ./init.sh          # Linux, macOS, Git Bash / WSL
    ./init.ps1         # Windows PowerShell nativo
    ```
 
-3. **Define tu backlog** en `feature_list.json` (usa [`skills/feature-list/SKILL.md`](skills/feature-list/SKILL.md)):
+3. **Define tu mission log** en `feature_list.json` (usa [`skills/feature-list/SKILL.md`](skills/feature-list/SKILL.md)):
    reemplaza las features de migración por las de **tu producto** (cada una con
    `"sdd": true` y `layer`: `backend`, `frontend`, `fullstack`, etc.).
 
@@ -39,7 +45,7 @@ y detiene desde contenedores.
 
    > «Implementa la siguiente feature pendiente»
 
-5. **Aprueba cada spec** en `specs/<feature>/` antes de que se escriba código.
+5. **Aprueba cada spec** en `specs/<feature>/` antes de que se escriba código (go/no-go humano).
 
 6. El **implementer** (o `backend_implementer` / `frontend_implementer` según `layer`
    en `feature_list.json`) crea código en `product/` y tests en `tests/`.
@@ -76,7 +82,7 @@ flowchart LR
 | `docker/Dockerfile.product` | Imagen del producto |
 | `docker/docker-compose.yml` | Servicios `app` y `test` (perfil `product`) |
 | `specs/<feature>/` | Spec SDD por feature |
-| `feature_list.json` | Backlog de tu producto |
+| `feature_list.json` | Backlog / mission log de tu producto |
 
 En la plantilla, `product/` y `tests/` están vacíos (solo `.gitkeep`).
 Aparecen al implementar la primera feature.
