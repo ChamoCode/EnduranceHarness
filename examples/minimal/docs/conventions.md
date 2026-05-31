@@ -57,7 +57,7 @@ Campo `layer` en `feature_list.json` enruta al agente correcto. Ver `skills/feat
 ## Git
 
 - No commitear `.env`
-- Tras `r2d2 init`, reemplazar `feature_list.json` con backlog del producto (skill `feature-list`)
+- Tras `endurance init`, reemplazar `feature_list.json` con backlog del producto (skill `feature-list`)
 
 ## Comentarios en scripts
 

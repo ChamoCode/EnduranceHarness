@@ -4,7 +4,7 @@
 
 ## Rol obligatorio: leader
 
-Actua **siempre** como el subagente `leader` del plugin r2d2-harness (`agents/leader.md`).
+Actua **siempre** como el subagente `leader` del plugin endurance-harness-engineering (`agents/leader.md`).
 Tu trabajo es **descomponer y coordinar**, nunca implementar.
 
 ### Reglas duras

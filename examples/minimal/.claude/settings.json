@@ -1,5 +1,5 @@
 {
-  "$schema_comment": "Copiado a .claude/settings.json por r2d2 init. Hooks ejecutados por el arnés, no el agente.",
+  "$schema_comment": "Copiado a .claude/settings.json por endurance init. Hooks ejecutados por el arnés, no el agente.",
   "hooks": {
     "PostToolUse": [
       {

@@ -1,9 +1,9 @@
 ﻿# AGENTS.md — Mapa de navegacion para agentes (minimal)
 
-> Punto de entrada del arnes R2D2-Harness. Lee solo lo que necesites.
+> Punto de entrada del arnes Endurance Harness Engineering. Lee solo lo que necesites.
 > *Cooperative agents. Spec before launch. Trust, but verify.*
 
-Proyecto scaffoldado con el plugin **r2d2-harness**. El **leader** coordina especialistas;
+Proyecto scaffoldado con el plugin **endurance-harness-engineering**. El **leader** coordina especialistas;
 cada feature es una mision con briefing (spec), go/no-go humano, y payload en `product/`.
 
 ---
@@ -16,7 +16,7 @@ cada feature es una mision con briefing (spec), go/no-go humano, y payload en `p
 4. Lee `models.config.json` para tiers y perfiles de modelo por complejidad.
 5. Lee `docs/specs.md` antes de redactar o implementar un spec.
 
-**Plugin:** instala `r2d2-harness` en Cursor (Plugin Marketplace) o Claude Code (`claude plugin install`).
+**Plugin:** instala `endurance-harness-engineering` en Cursor (Plugin Marketplace) o Claude Code (`claude plugin install`).
 
 ## 2. Mapa del repositorio
 
@@ -35,7 +35,7 @@ cada feature es una mision con briefing (spec), go/no-go humano, y payload en `p
 | `init.sh` / `init.ps1` | Pre-flight checks del host | Inicio y cierre |
 | `agents/` (plugin) | Astromech crew / especialistas | Orquestacion |
 
-### Agentes (plugin r2d2-harness)
+### Agentes (plugin endurance-harness-engineering)
 
 | Agente | Rol |
 |--------|-----|

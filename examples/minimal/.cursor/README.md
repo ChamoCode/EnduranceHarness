@@ -1,3 +1,3 @@
-﻿# Cursor â€” plugin r2d2-harness
+﻿# Cursor — plugin endurance-harness-engineering
 
-Instala el plugin r2d2-harness desde Plugin Marketplace o copia a ~/.cursor/plugins/local/r2d2-harness
+Instala el plugin endurance-harness-engineering desde Plugin Marketplace o copia a ~/.cursor/plugins/local/endurance-harness-engineering

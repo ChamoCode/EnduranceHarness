@@ -8,7 +8,7 @@
 1. **El repositorio ES el sistema.** Estado, specs y progreso viven en disco,
    no en el chat del agente.
 
-2. **Proyecto scaffoldado.** Creado con `r2d2 init` del plugin r2d2-harness; el codigo crece in-repo via SDD.
+2. **Proyecto scaffoldado.** Creado con `endurance init` del plugin endurance-harness-engineering; el codigo crece in-repo via SDD.
 
 3. **Producto in-repo.** El codigo vive en `product/` y los tests en `tests/`.
    Crece feature a feature via SDD.

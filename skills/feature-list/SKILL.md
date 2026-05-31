@@ -3,14 +3,14 @@ name: feature-list
 description: >-
   Crea y edita feature_list.json para el arnés Harness SDD/TDD: reglas, estados,
   layer backend/frontend, complexity, tdd y recomendacion de modelo. Usar al definir
-  backlog, tras r2d2 init (lite o full), o al añadir features con sdd/tdd.
+  backlog, tras endurance init (lite o full), o al añadir features con sdd/tdd.
 ---
 
 # Feature List — Backlog SDD/TDD
 
 ## Cuándo usar
 
-- Tras `r2d2 init` para reemplazar features de ejemplo por el backlog real
+- Tras `endurance init` para reemplazar features de ejemplo por el backlog real
 - Añadir, editar o reordenar features en `feature_list.json`
 - Asignar `layer`, `complexity` y decidir si la feature usa `tdd`
 

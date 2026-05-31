@@ -1,8 +1,8 @@
-# R2D2-Harness Plugin — Metadata
+# Endurance Harness Engineering Plugin — Metadata
 
 ## Identificador
 
-- **Nombre:** `r2d2-harness`
+- **Nombre:** `endurance-harness-engineering`
 - **Versión:** 1.0.0
 - **Autor:** ChamoCode
 
@@ -16,7 +16,7 @@ Arnés SDD con agentes cooperativos, skills y enrutamiento de modelos por comple
 
 ```powershell
 # Windows — junction/symlink al repo clonado
-New-Item -ItemType Junction -Path "$env:USERPROFILE\.cursor\plugins\local\r2d2-harness" -Target "C:\path\to\R2D2-Harness"
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.cursor\plugins\local\endurance-harness-engineering" -Target "C:\path\to\endurance-harness-engineering"
 ```
 
 Reinicia Cursor o **Reload Window**.
@@ -24,22 +24,22 @@ Reinicia Cursor o **Reload Window**.
 ### Claude Code
 
 ```bash
-claude plugin install ./path/to/R2D2-Harness --scope user
+claude plugin install ./path/to/endurance-harness-engineering --scope user
 # o en desarrollo:
-claude --plugin-dir /path/to/R2D2-Harness
+claude --plugin-dir /path/to/endurance-harness-engineering
 ```
 
 Validacion:
 
 ```bash
-claude plugin validate /path/to/R2D2-Harness --strict
+claude plugin validate /path/to/endurance-harness-engineering --strict
 ```
 
 ## Comandos incluidos
 
 | Comando | Descripcion |
 |---------|-------------|
-| `r2d2 init --name X --path Y` | Scaffold de proyecto desde `templates/project/` |
+| `endurance init --name X --path Y` | Scaffold de proyecto desde `templates/project/` |
 
 Binarios en `bin/` del plugin (Claude Code los expone en PATH).
 
@@ -49,7 +49,7 @@ Binarios en `bin/` del plugin (Claude Code los expone en PATH).
 - `skills/` — feature-list, agent-author, model-routing
 - `rules/` — leader-role.mdc, sdd-protocol.mdc
 - `hooks/hooks.json.template`
-- `templates/project/` — no empaquetado como runtime; usado por `r2d2 init`
+- `templates/project/` — no empaquetado como runtime; usado por `endurance init`
 
 ## Model routing
 
@@ -73,6 +73,6 @@ Tiers editables por plan del usuario:
 ### 1.0.0
 
 - Plugin dual Cursor + Claude Code
-- Comando `r2d2 init`
+- Comando `endurance init`
 - Enrutamiento de modelos por `complexity` en feature_list.json
 - Skills feature-list, agent-author, model-routing

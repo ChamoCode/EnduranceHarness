@@ -73,7 +73,7 @@ services:
 ## Patron avanzado (opcional)
 
 Montar codigo desde **otro repo** via volumen en compose es posible pero **no**
-es el flujo principal. La convencion recomendada es `r2d2 init` y desarrollar
+es el flujo principal. La convencion recomendada es `endurance init` y desarrollar
 el producto in-repo con SDD.
 
 ## Troubleshooting

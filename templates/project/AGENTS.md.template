@@ -3,7 +3,7 @@
 > *Cooper, TARS is standing by. CASE on verification channel.*
 > *— Mission Control, Endurance*
 
-Full-stack project with **r2d2-harness**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
+Full-stack project with **endurance-harness-engineering**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
 
 ---
 
@@ -13,7 +13,7 @@ Full-stack project with **r2d2-harness**. **Mission Control** orchestrates. **Co
 2. Read `progress/current.md`, `feature_list.json`, `models.config.json`.
 3. Read `docs/specs.md` before briefing or implementation.
 
-**Plugin:** install `r2d2-harness` in Cursor or Claude Code.
+**Plugin:** install `endurance-harness-engineering` in Cursor or Claude Code.
 
 ---
 

@@ -3,7 +3,7 @@
 > *Cooper, TARS is standing by. CASE on verification channel.*
 > *— Mission Control, Endurance*
 
-Lite-mode project with **r2d2-harness**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
+Lite-mode project with **endurance-harness-engineering**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
 
 ---
 
@@ -13,7 +13,7 @@ Lite-mode project with **r2d2-harness**. **Mission Control** orchestrates. **Coo
 2. Read `feature_list.json` — Mission Parameters.
 3. Read `models.config.json` — tiers, profiles, `tars.*` and `case.*` personality settings.
 
-**Plugin:** install `r2d2-harness` in Cursor or Claude Code.
+**Plugin:** install `endurance-harness-engineering` in Cursor or Claude Code.
 
 ---
 
