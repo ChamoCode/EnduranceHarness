@@ -1,20 +1,27 @@
-# Sesión actual
+# Active Mission Telemetry
 
-> Este archivo se vacía al cerrar cada sesión y se mueve a `history.md`.
-> Mientras trabajas, **mantenlo actualizado en tiempo real**, no al final.
+> Clear at mission close → archive to `history.md`. Update in real time.
 
-- **Feature en curso:** _ninguna_
-- **Inicio:** _—_
-- **Agente:** _—_
+- **Active mission:** _none_
+- **Mission start:** _—_
+- **Crew on duty:** _—_
+- **TARS:** humor _—_ % | honesty _—_ % | caution _—_ %
+- **CASE:** humor _—_ % | honesty _—_ % | caution _—_ %
 
-## Plan
+---
+
+## Mission Plan
 
 _—_
 
-## Bitácora
+---
+
+## Telemetry Log
 
 _—_
 
-## Próximo paso
+---
+
+## Next Waypoint
 
 _—_

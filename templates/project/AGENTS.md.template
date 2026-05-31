@@ -1,77 +1,75 @@
-# AGENTS.md — Mapa de navegacion para agentes ({{PROJECT_NAME}})
+# AGENTS.md — {{PROJECT_NAME}}
 
-> Punto de entrada del arnes R2D2-Harness. Lee solo lo que necesites.
-> *Cooperative agents. Spec before launch. Trust, but verify.*
+> *Cooper, TARS is standing by. CASE on verification channel.*
+> *— Mission Control, Endurance*
 
-Proyecto scaffoldado con el plugin **r2d2-harness**. El **leader** coordina especialistas;
-cada feature es una mision con briefing (spec), go/no-go humano, y payload en `product/`.
+Full-stack project with **r2d2-harness**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
 
 ---
 
-## 1. Antes de empezar (obligatorio)
+## 1. Pre-flight Checklist
 
-1. **Pre-flight:** ejecuta `./init.sh` (o `./init.ps1` en Windows PowerShell). Si falla, **para**.
-2. Lee `progress/current.md` para el estado de la mision activa.
-3. Lee `feature_list.json` (mission log). Features con `"sdd": true` siguen SDD — ver `docs/specs.md`.
-4. Lee `models.config.json` para tiers y perfiles de modelo por complejidad.
-5. Lee `docs/specs.md` antes de redactar o implementar un spec.
+1. **Pre-flight:** `./init.sh` or `./init.ps1`. If it fails, halt.
+2. Read `progress/current.md`, `feature_list.json`, `models.config.json`.
+3. Read `docs/specs.md` before briefing or implementation.
 
-**Plugin:** instala `r2d2-harness` en Cursor (Plugin Marketplace) o Claude Code (`claude plugin install`).
+**Plugin:** install `r2d2-harness` in Cursor or Claude Code.
 
-## 2. Mapa del repositorio
+---
 
-| Archivo / carpeta | Que contiene | Cuando leerlo |
-|-------------------|--------------|---------------|
-| `feature_list.json` | Mission log con `layer` y `complexity` | Siempre |
-| `models.config.json` | Tiers y perfiles de modelo por complejidad | Al orquestar subagentes |
-| `product/backend/` | Codigo backend (payload) | layer backend |
-| `product/frontend/` | Codigo frontend (payload) | layer frontend |
-| `tests/backend/` | Tests backend | Verificar backend |
-| `tests/frontend/` | Tests frontend | Verificar frontend |
-| `progress/current.md` | Bitacora de la mision activa | Siempre |
-| `specs/<feature>/` | Briefing SDD | Antes de implementar |
-| `docs/` | Arquitectura, SDD, Docker, verificacion | Segun tarea |
-| `docker/` | Dockerfiles, compose, scripts | Infra y producto |
-| `init.sh` / `init.ps1` | Pre-flight checks del host | Inicio y cierre |
-| `agents/` (plugin) | Astromech crew / especialistas | Orquestacion |
+## 2. Mission Map
 
-### Agentes (plugin r2d2-harness)
+| File / folder | Contents |
+|---|---|
+| `feature_list.json` | Mission Parameters |
+| `models.config.json` | Model tiers + TARS/CASE settings |
+| `product/backend/`, `product/frontend/` | Payload (TARS) |
+| `tests/backend/`, `tests/frontend/` | Verification targets (CASE) |
+| `progress/current.md` | Active Mission Telemetry |
+| `specs/<feature>/` | Mission Briefing (TARS) |
+| `docker/` | Life support (CASE) |
+| `init.sh` / `init.ps1` | Pre-flight |
 
-| Agente | Rol |
-|--------|-----|
-| `leader` | Orquesta; no implementa |
-| `spec_author` | Specs EARS |
-| `backend_implementer` / `frontend_implementer` / `implementer` | Payload por capa |
-| `docker_manager` | Docker y compose |
-| `backend_reviewer` / `frontend_reviewer` / `reviewer` | Control de calidad |
+### Endurance Crew
 
-## 3. Reglas duras
+| Agent ID | Character | Role |
+|---|---|---|
+| `leader` | **Mission Control** | Orchestrates Cooper ↔ TARS ↔ CASE |
+| `spec_author` | **TARS** (briefing) | EARS specs |
+| `implementer_*` | **TARS** (payload) | Code and tests |
+| `docker_manager` | **CASE** (life support) | Docker / infra |
+| `reviewer_*` | **CASE** (verification) | MISSION_CLEARED / ABORT |
 
-- **Una feature a la vez.** Maximo una en `in_progress`.
-- **No declares `done` sin verify verde.**
-- **No saltes SDD** ni el **go/no-go humano** en `spec_ready`.
-- **Modelos por complejidad:** el leader resuelve modelo desde `models.config.json` + `feature.complexity`.
+**Cooper** = the human. Go/no-go at `spec_ready`.
 
-## 4. Flujo SDD
+---
+
+## 3. Standing Orders
+
+- One mission at a time. Pre-flight green before close.
+- Cooper's go/no-go at `spec_ready`. CASE clearance before `done`.
+- TARS/CASE personality from `models.config.json`.
+
+---
+
+## 4. Mission Dialogue
 
 ```
-pending → [spec_author] → spec_ready → HUMANO → in_progress
-  → [implementer_* / docker_manager] → [reviewer_*] → done
+Cooper → Mission Control → TARS (briefing) → Cooper go/no-go
+       → TARS (payload) → CASE (review) → Mission cleared
 ```
 
-## 5. Cierre de sesion
+---
 
-1. Pre-flight final: `./init.sh` o `./init.ps1` — verde.
-2. Feature completada → `status: "done"` en `feature_list.json`.
-3. Resumen de `progress/current.md` → `progress/history.md`.
-4. Vacia `progress/current.md` (plantilla).
+## Glossary
 
-## Glosario
-
-| Termino | En el repo |
-|---------|------------|
-| Flight plan | `feature_list.json` |
-| Briefing | `specs/<feature>/` |
-| Go/no-go | Aprobacion humana en `spec_ready` |
+| Term | Artifact |
+|---|---|
+| Cooper | You (human) |
+| Mission Control | `leader` |
+| TARS | spec + implement |
+| CASE | review + docker |
+| Mission Parameters | `feature_list.json` |
+| Mission Briefing | `specs/<feature>/` |
 | Payload | `product/` + `tests/` |
-| Pre-flight | `init.sh`, `init.ps1`, `verify.sh` |
+| Pre-flight | `init.sh`, `verify.sh` |

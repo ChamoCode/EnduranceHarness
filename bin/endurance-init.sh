@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# r2d2-init.sh — Scaffold de proyecto R2D2-Harness desde el plugin
+# endurance-init.sh — Scaffold projects from Endurance Harness Engineering plugin
 set -euo pipefail
 
 PLUGIN_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -11,14 +11,14 @@ FULL=false
 
 usage() {
   cat <<EOF
-Uso: r2d2 init --name <nombre> --path <directorio> [opciones]
+Usage: endurance init --name <name> --path <directory> [options]
 
-  --name       Identificador del proyecto (snake_case o kebab-case)
-  --path       Directorio destino (se crea si no existe; puede ser .)
-  --force      Sobrescribe archivos en destino no vacio
-  --git-init   Ejecuta git init en el destino
-  --full       Modo completo: copia docker/, docs/, product/, tests/, init scripts
-               (por defecto crea solo specs/, progress/ y archivos de tracking)
+  --name       Project identifier (snake_case or kebab-case)
+  --path       Destination directory (created if missing; can be .)
+  --force      Overwrite non-empty destination
+  --git-init   Run git init in destination
+  --full       Full mode: copies docker/, docs/, product/, tests/, init scripts
+               (default: specs/, progress/ and tracking files only)
 EOF
   exit 1
 }
@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
     --git-init) GIT_INIT=true; shift ;;
     --full) FULL=true; shift ;;
     -h|--help) usage ;;
-    *) echo "Opcion desconocida: $1"; usage ;;
+    *) echo "Unknown option: $1"; usage ;;
   esac
 done
 
@@ -43,14 +43,14 @@ TARGET_PATH="$(cd "$(dirname "$TARGET_PATH")" 2>/dev/null && pwd)/$(basename "$T
 
 if [[ -d "$TARGET_PATH" ]]; then
   if [[ "$FORCE" != true ]] && [[ -n "$(ls -A "$TARGET_PATH" 2>/dev/null)" ]]; then
-    echo "[FAIL]  $TARGET_PATH no esta vacio. Usa --force para continuar."
+    echo "[FAIL]  $TARGET_PATH is not empty. Use --force to continue."
     exit 1
   fi
 else
   mkdir -p "$TARGET_PATH"
 fi
 
-PROJECT_DESC="Proyecto $PROJECT_NAME scaffoldado con R2D2-Harness plugin."
+PROJECT_DESC="Project $PROJECT_NAME scaffolded with Endurance Harness Engineering plugin."
 
 replace_placeholders() {
   local f="$1"
@@ -61,9 +61,8 @@ replace_placeholders() {
 }
 
 if [[ "$FULL" == true ]]; then
-  # ── Modo completo (docker, docs, product, tests) ─────────────────────
   TEMPLATE_DIR="$PLUGIN_ROOT/templates/project"
-  echo "[OK]    Modo completo — copiando plantilla desde $TEMPLATE_DIR"
+  echo "[OK]    Full mode — copying template from $TEMPLATE_DIR"
   cp -R "$TEMPLATE_DIR/." "$TARGET_PATH/"
 
   for tmpl in AGENTS.md CLAUDE.md; do
@@ -87,31 +86,24 @@ if [[ "$FULL" == true ]]; then
   fi
 
   NEXT_STEPS="  1. cd $TARGET_PATH
-  2. Instala plugin r2d2-harness
-  3. ./init.sh  (o ./init.ps1 en Windows)
-  4. Usa skill feature-list para definir backlog con complexity
-  5. 'Implementa la siguiente feature pendiente'"
+  2. Install plugin endurance-harness-engineering
+  3. ./init.sh  (or ./init.ps1 on Windows)
+  4. Use skill feature-list to define backlog with complexity
+  5. 'Implement the next pending feature'"
 
 else
-  # ── Modo ligero (solo tracking) ──────────────────────────────────────
   TEMPLATE_DIR="$PLUGIN_ROOT/templates/lite"
-  echo "[OK]    Modo ligero — creando estructura de tracking en $TARGET_PATH"
+  echo "[OK]    Lite mode — creating tracking structure in $TARGET_PATH"
 
-  mkdir -p "$TARGET_PATH/specs"
-  mkdir -p "$TARGET_PATH/progress"
-  mkdir -p "$TARGET_PATH/.claude"
-  mkdir -p "$TARGET_PATH/.cursor"
+  mkdir -p "$TARGET_PATH/specs" "$TARGET_PATH/progress" "$TARGET_PATH/.claude" "$TARGET_PATH/.cursor"
 
-  # progress files
   PROG_SRC="$PLUGIN_ROOT/templates/project/progress"
   [[ -f "$PROG_SRC/current.md" ]] && cp "$PROG_SRC/current.md" "$TARGET_PATH/progress/current.md"
   [[ -f "$PROG_SRC/history.md" ]] && cp "$PROG_SRC/history.md" "$TARGET_PATH/progress/history.md"
 
-  # models.config.json
   [[ -f "$PLUGIN_ROOT/templates/project/models.config.json" ]] && \
     cp "$PLUGIN_ROOT/templates/project/models.config.json" "$TARGET_PATH/models.config.json"
 
-  # AGENTS.md, CLAUDE.md, feature_list.json desde lite template
   for tmpl in AGENTS.md CLAUDE.md; do
     if [[ -f "$TEMPLATE_DIR/${tmpl}.template" ]]; then
       cp "$TEMPLATE_DIR/${tmpl}.template" "$TARGET_PATH/$tmpl"
@@ -124,34 +116,33 @@ else
     replace_placeholders "$TARGET_PATH/feature_list.json"
   fi
 
-  # hooks ligeros
   HOOKS_SRC="$PLUGIN_ROOT/hooks/hooks-lite.json.template"
   [[ -f "$HOOKS_SRC" ]] && cp "$HOOKS_SRC" "$TARGET_PATH/.claude/settings.json"
 
   cat > "$TARGET_PATH/.cursor/README.md" <<EOF
-# Cursor — plugin r2d2-harness
+# Cursor — plugin endurance-harness-engineering
 
-Instala el plugin r2d2-harness desde Plugin Marketplace o copia a ~/.cursor/plugins/local/r2d2-harness
+Install from Plugin Marketplace or copy to ~/.cursor/plugins/local/endurance-harness-engineering
 EOF
 
   NEXT_STEPS="  1. cd $TARGET_PATH
-  2. Instala plugin r2d2-harness
-  3. Usa skill feature-list para definir backlog (con complexity y tdd si aplica)
-  4. 'Implementa la siguiente feature pendiente'"
+  2. Install plugin endurance-harness-engineering
+  3. Use skill feature-list to define backlog (complexity and tdd)
+  4. 'Implement the next pending feature'"
 fi
 
 if [[ "$GIT_INIT" == true ]]; then
   (cd "$TARGET_PATH" && git init)
-  echo "[OK]    git init en $TARGET_PATH"
+  echo "[OK]    git init in $TARGET_PATH"
 fi
 
-MODE_LABEL="$([ "$FULL" == true ] && echo "completo" || echo "ligero")"
+MODE_LABEL="$([ "$FULL" == true ] && echo "full" || echo "lite")"
 
 cat <<EOF
 
-[OK]    Proyecto scaffoldado en: $TARGET_PATH
-        Modo: $MODE_LABEL
+[OK]    Project scaffolded at: $TARGET_PATH
+        Mode: $MODE_LABEL
 
-Proximos pasos:
+Next steps:
 $NEXT_STEPS
 EOF

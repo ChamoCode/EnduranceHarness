@@ -1,79 +1,87 @@
 # AGENTS.md — {{PROJECT_NAME}}
 
-> *Cooperative agents. Spec before launch. Trust, but verify.*
+> *Cooper, TARS is standing by. CASE on verification channel.*
+> *— Mission Control, Endurance*
 
-Proyecto scaffoldado con el plugin **r2d2-harness** (modo ligero).
-El **leader** coordina especialistas; cada feature tiene spec, go/no-go humano e implementacion.
+Lite-mode project with **r2d2-harness**. **Mission Control** orchestrates. **Cooper** (you) approves. **TARS** briefs and builds. **CASE** verifies and maintains life support.
 
 ---
 
-## 1. Antes de empezar (obligatorio)
+## 1. Pre-flight Checklist
 
-1. Lee `progress/current.md` para el estado de la mision activa.
-2. Lee `feature_list.json` (mission log). Features con `"sdd": true` siguen SDD.
-3. Lee `models.config.json` para tiers y perfiles de modelo por complejidad.
+1. Read `progress/current.md` — Active Mission Telemetry.
+2. Read `feature_list.json` — Mission Parameters.
+3. Read `models.config.json` — tiers, profiles, `tars.*` and `case.*` personality settings.
 
-**Plugin:** instala `r2d2-harness` en Cursor (Plugin Marketplace) o Claude Code (`claude plugin install`).
+**Plugin:** install `r2d2-harness` in Cursor or Claude Code.
 
-## 2. Mapa del repositorio
+---
 
-| Archivo / carpeta | Que contiene | Cuando leerlo |
-|-------------------|--------------|---------------|
-| `feature_list.json` | Mission log con `layer`, `complexity` y `tdd` | Siempre |
-| `models.config.json` | Tiers y perfiles de modelo por complejidad | Al orquestar subagentes |
-| `progress/current.md` | Bitacora de la mision activa | Siempre |
-| `progress/history.md` | Historial de sesiones cerradas | Al repasar historial |
-| `specs/<feature>/` | Briefing SDD (requirements, design, tasks) | Antes de implementar |
-| `agents/` (plugin) | Astromech crew / especialistas | Orquestacion |
+## 2. Mission Map
 
-> Este proyecto usa modo **ligero** — sin docker ni estructura product/tests predefinida.
-> Las rutas de codigo las define cada spec segun la arquitectura del proyecto.
+| File / folder | Contents |
+|---|---|
+| `feature_list.json` | Mission Parameters |
+| `models.config.json` | Model tiers + TARS/CASE communication settings |
+| `progress/current.md` | Active Mission Telemetry |
+| `specs/<feature>/` | Mission Briefing (TARS) |
+| `agents/` (plugin) | Mission Control, TARS, CASE crew |
 
-### Agentes (plugin r2d2-harness)
+### Endurance Crew
 
-| Agente | Rol |
-|--------|-----|
-| `leader` | Orquesta; no implementa |
-| `spec_author` | Specs EARS (+ tests.md si `tdd: true`) |
-| `backend_implementer` / `frontend_implementer` / `implementer` | Payload por capa |
-| `docker_manager` | Docker y compose (si aplica) |
-| `backend_reviewer` / `frontend_reviewer` / `reviewer` | Control de calidad |
+| Agent ID | Character | Role |
+|---|---|---|
+| `leader` | **Mission Control** | Orchestrates Cooper ↔ TARS ↔ CASE |
+| `spec_author` | **TARS** (briefing) | EARS specs + `tests.md` if TDD |
+| `implementer_*` | **TARS** (payload) | Code and tests |
+| `docker_manager` | **CASE** (life support) | Docker / infra |
+| `reviewer_*` | **CASE** (verification) | MISSION_CLEARED / ABORT |
 
-## 3. Reglas duras
+**Cooper** = the human. Go/no-go at `spec_ready`. Not an agent.
 
-- **Una feature a la vez.** Maximo una en `in_progress`.
-- **No declares `done` sin verify verde.**
-- **No saltes SDD** ni el **go/no-go humano** en `spec_ready`.
-- **Modelos por complejidad:** el leader resuelve modelo desde `models.config.json` + `feature.complexity`.
-- **TDD:** si `feature.tdd == true`, el implementer escribe tests primero (Red → Green → Refactor).
+---
 
-## 4. Flujos
+## 3. Standing Orders
 
-### SDD estandar
+- One mission at a time (`in_progress`).
+- No `done` without CASE MISSION_CLEARED.
+- Cooper's go/no-go required at `spec_ready`.
+- TARS: humor 75%, caution 0%. CASE: humor 40%, caution 60% (defaults in `models.config.json`).
 
-```
-pending → [spec_author] → spec_ready → HUMANO → in_progress
-  → [implementer_*] → [reviewer_*] → done
-```
+---
 
-### TDD (feature con tdd: true)
+## 4. Mission Dialogue (typical)
 
 ```
-pending → [spec_author + tests.md] → spec_ready → HUMANO → in_progress
-  → [implementer Red] → [implementer Green] → [reviewer] → done
+Cooper:          "Implement the next pending feature"
+Mission Control: "Deploying TARS for briefing..."
+TARS:            spec_ready -> specs/user_auth/
+Mission Control: "Cooper, your go/no-go."
+Cooper:          "approved"
+Mission Control: "TARS on payload. CASE on standby."
+TARS:            done -> progress/impl_user_auth.md
+CASE:            MISSION_CLEARED -> progress/review_user_auth.md
+Mission Control: "Mission cleared, Cooper."
 ```
 
-## 5. Cierre de sesion
+---
 
-1. Feature completada → `status: "done"` en `feature_list.json`.
-2. Resumen de `progress/current.md` → `progress/history.md`.
-3. Vacia `progress/current.md` (plantilla).
+## 5. Flows
 
-## Glosario
+**SDD:** pending → TARS briefing → spec_ready → **Cooper** → TARS payload → CASE review → done
 
-| Termino | En el repo |
-|---------|------------|
-| Flight plan | `feature_list.json` |
-| Briefing | `specs/<feature>/` |
-| Go/no-go | Aprobacion humana en `spec_ready` |
-| Pre-flight | Sin docker en modo ligero — valida con script del proyecto si existe |
+**TDD+SDD:** + `tests.md` → TARS Red/Green/Refactor → CASE verifies tests-first
+
+---
+
+## Glossary
+
+| Term | Artifact |
+|---|---|
+| Cooper | You (human go/no-go) |
+| Mission Control | `leader` agent |
+| TARS | `spec_author`, `implementer_*` |
+| CASE | `reviewer_*`, `docker_manager` |
+| Mission Parameters | `feature_list.json` |
+| Mission Briefing | `specs/<feature>/` |
+| Active Mission Telemetry | `progress/current.md` |

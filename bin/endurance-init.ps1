@@ -1,4 +1,4 @@
-# r2d2-init.ps1 — Scaffold de proyecto R2D2-Harness desde el plugin
+# endurance-init.ps1 — Scaffold projects from Endurance Harness Engineering plugin
 param(
     [Parameter(Mandatory = $true)]
     [string]$Name,
@@ -28,37 +28,29 @@ function Replace-Placeholders {
 if (Test-Path $TargetPath) {
     $items = Get-ChildItem $TargetPath -Force -ErrorAction SilentlyContinue
     if ($items.Count -gt 0 -and -not $Force) {
-        Write-Fail "$TargetPath no esta vacio. Usa -Force para continuar."
+        Write-Fail "$TargetPath is not empty. Use -Force to continue."
     }
 } else {
     New-Item -ItemType Directory -Path $TargetPath -Force | Out-Null
 }
 
-$ProjectDesc = "Proyecto $Name scaffoldado con R2D2-Harness plugin."
+$ProjectDesc = "Project $Name scaffolded with Endurance Harness Engineering plugin."
 
 if ($Full) {
-    # ── Modo completo (docker, docs, product, tests) ───────────────────────
     $TemplateDir = Join-Path $PluginRoot "templates\project"
-    Write-Ok "Modo completo — copiando plantilla desde $TemplateDir"
+    Write-Ok "Full mode — copying template from $TemplateDir"
     Copy-Item -Path (Join-Path $TemplateDir "*") -Destination $TargetPath -Recurse -Force
 
-    # AGENTS.md
-    $t = Join-Path $TargetPath "AGENTS.md.template"
-    if (Test-Path $t) {
-        $d = Join-Path $TargetPath "AGENTS.md"
-        Copy-Item $t $d -Force
-        Replace-Placeholders $d $Name $ProjectDesc
-        Remove-Item $t -Force
+    foreach ($tmpl in @("AGENTS.md", "CLAUDE.md")) {
+        $t = Join-Path $TargetPath "$tmpl.template"
+        if (Test-Path $t) {
+            $d = Join-Path $TargetPath $tmpl
+            Copy-Item $t $d -Force
+            Replace-Placeholders $d $Name $ProjectDesc
+            Remove-Item $t -Force
+        }
     }
-    # CLAUDE.md
-    $t = Join-Path $TargetPath "CLAUDE.md.template"
-    if (Test-Path $t) {
-        $d = Join-Path $TargetPath "CLAUDE.md"
-        Copy-Item $t $d -Force
-        Replace-Placeholders $d $Name $ProjectDesc
-        Remove-Item $t -Force
-    }
-    # feature_list.json
+
     $t = Join-Path $TargetPath "feature_list.json.template"
     if (Test-Path $t) {
         $d = Join-Path $TargetPath "feature_list.json"
@@ -66,7 +58,7 @@ if ($Full) {
         Replace-Placeholders $d $Name $ProjectDesc
         Remove-Item $t -Force
     }
-    # hooks -> .claude/settings.json
+
     $hooksSrc = Join-Path $PluginRoot "hooks\hooks.json.template"
     if (Test-Path $hooksSrc) {
         $claudeDir = Join-Path $TargetPath ".claude"
@@ -75,52 +67,40 @@ if ($Full) {
     }
     $nextSteps = @(
         "  1. cd $TargetPath",
-        "  2. Instala plugin r2d2-harness",
+        "  2. Install plugin endurance-harness-engineering",
         "  3. ./init.ps1",
-        "  4. Usa skill feature-list para definir backlog con complexity",
-        "  5. 'Implementa la siguiente feature pendiente'"
+        "  4. Use skill feature-list to define backlog with complexity",
+        "  5. 'Implement the next pending feature'"
     )
 } else {
-    # ── Modo ligero (solo tracking) ────────────────────────────────────────
     $TemplateDir = Join-Path $PluginRoot "templates\lite"
-    Write-Ok "Modo ligero — creando estructura de tracking en $TargetPath"
+    Write-Ok "Lite mode — creating tracking structure in $TargetPath"
 
-    # Carpetas de tracking
     New-Item -ItemType Directory -Force -Path (Join-Path $TargetPath "specs")    | Out-Null
     New-Item -ItemType Directory -Force -Path (Join-Path $TargetPath "progress") | Out-Null
     New-Item -ItemType Directory -Force -Path (Join-Path $TargetPath ".claude")  | Out-Null
     New-Item -ItemType Directory -Force -Path (Join-Path $TargetPath ".cursor")  | Out-Null
 
-    # progress/current.md y history.md
     $progressSrc = Join-Path $PluginRoot "templates\project\progress"
     if (Test-Path $progressSrc) {
         Copy-Item (Join-Path $progressSrc "current.md") (Join-Path $TargetPath "progress\current.md") -Force
         Copy-Item (Join-Path $progressSrc "history.md") (Join-Path $TargetPath "progress\history.md") -Force -ErrorAction SilentlyContinue
     }
 
-    # models.config.json
     $modelsSrc = Join-Path $PluginRoot "templates\project\models.config.json"
     if (Test-Path $modelsSrc) {
         Copy-Item $modelsSrc (Join-Path $TargetPath "models.config.json") -Force
     }
 
-    # AGENTS.md desde lite template
-    $t = Join-Path $TemplateDir "AGENTS.md.template"
-    if (Test-Path $t) {
-        $d = Join-Path $TargetPath "AGENTS.md"
-        Copy-Item $t $d -Force
-        Replace-Placeholders $d $Name $ProjectDesc
+    foreach ($tmpl in @("AGENTS.md", "CLAUDE.md")) {
+        $t = Join-Path $TemplateDir "$tmpl.template"
+        if (Test-Path $t) {
+            $d = Join-Path $TargetPath $tmpl
+            Copy-Item $t $d -Force
+            Replace-Placeholders $d $Name $ProjectDesc
+        }
     }
 
-    # CLAUDE.md desde lite template
-    $t = Join-Path $TemplateDir "CLAUDE.md.template"
-    if (Test-Path $t) {
-        $d = Join-Path $TargetPath "CLAUDE.md"
-        Copy-Item $t $d -Force
-        Replace-Placeholders $d $Name $ProjectDesc
-    }
-
-    # feature_list.json desde lite template
     $t = Join-Path $TemplateDir "feature_list.json.template"
     if (Test-Path $t) {
         $d = Join-Path $TargetPath "feature_list.json"
@@ -128,35 +108,32 @@ if ($Full) {
         Replace-Placeholders $d $Name $ProjectDesc
     }
 
-    # hooks ligeros -> .claude/settings.json
     $hooksSrc = Join-Path $PluginRoot "hooks\hooks-lite.json.template"
     if (Test-Path $hooksSrc) {
         Copy-Item $hooksSrc (Join-Path $TargetPath ".claude\settings.json") -Force
     }
 
-    # .cursor readme
     @"
-# Cursor — plugin r2d2-harness
+# Cursor — plugin endurance-harness-engineering
 
-Instala el plugin r2d2-harness desde Plugin Marketplace o copia a ~/.cursor/plugins/local/r2d2-harness
+Install from Plugin Marketplace or copy to ~/.cursor/plugins/local/endurance-harness-engineering
 "@ | Set-Content (Join-Path $TargetPath ".cursor\README.md") -Encoding UTF8
 
     $nextSteps = @(
         "  1. cd $TargetPath",
-        "  2. Instala plugin r2d2-harness",
-        "  3. Usa skill feature-list para definir backlog (con complexity y tdd si aplica)",
-        "  4. 'Implementa la siguiente feature pendiente'"
+        "  2. Install plugin endurance-harness-engineering",
+        "  3. Use skill feature-list to define backlog (complexity and tdd)",
+        "  4. 'Implement the next pending feature'"
     )
 }
 
-# .cursor README (modo completo tambien)
 if ($Full) {
     $cursorDir = Join-Path $TargetPath ".cursor"
     New-Item -ItemType Directory -Path $cursorDir -Force | Out-Null
     @"
-# Cursor — plugin r2d2-harness
+# Cursor — plugin endurance-harness-engineering
 
-Instala el plugin r2d2-harness desde Plugin Marketplace o copia a ~/.cursor/plugins/local/r2d2-harness
+Install from Plugin Marketplace or copy to ~/.cursor/plugins/local/endurance-harness-engineering
 "@ | Set-Content (Join-Path $cursorDir "README.md") -Encoding UTF8
 }
 
@@ -164,13 +141,13 @@ if ($GitInit) {
     Push-Location $TargetPath
     git init
     Pop-Location
-    Write-Ok "git init en $TargetPath"
+    Write-Ok "git init in $TargetPath"
 }
 
 Write-Host ""
-Write-Ok "Proyecto scaffoldado en: $TargetPath"
-$modeLabel = if ($Full) { "(modo completo)" } else { "(modo ligero)" }
-Write-Host "  Modo: $modeLabel" -ForegroundColor Cyan
+Write-Ok "Project scaffolded at: $TargetPath"
+$modeLabel = if ($Full) { "(full mode)" } else { "(lite mode)" }
+Write-Host "  Mode: $modeLabel" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Proximos pasos:"
+Write-Host "Next steps:"
 $nextSteps | ForEach-Object { Write-Host $_ }

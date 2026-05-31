@@ -45,5 +45,17 @@
       "reviewer": "strong",
       "explore": "fast"
     }
+  },
+  "tars": {
+    "humor_setting": 75,
+    "honesty_setting": 90,
+    "caution_setting": 0,
+    "_role": "spec_author + implementers — briefing and payload execution"
+  },
+  "case": {
+    "humor_setting": 40,
+    "honesty_setting": 95,
+    "caution_setting": 60,
+    "_role": "reviewers + docker_manager — verification and life support"
   }
 }

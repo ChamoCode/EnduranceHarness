@@ -5,9 +5,9 @@
   },
   "plugins": [
     {
-      "name": "r2d2-harness",
+      "name": "endurance-harness-engineering",
       "source": "./",
-      "description": "Arnés SDD con agentes cooperativos y model routing"
+      "description": "Endurance Harness Engineering — SDD/TDD agents, TARS/CASE crew, model routing"
     }
   ]
 }

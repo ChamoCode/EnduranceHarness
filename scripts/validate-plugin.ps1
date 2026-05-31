@@ -13,8 +13,8 @@ $required = @(
     "rules/leader-role.mdc",
     "rules/sdd-protocol.mdc",
     "hooks/hooks.json.template",
-    "bin/r2d2-init.ps1",
-    "bin/r2d2-init.sh",
+    "bin/endurance-init.ps1",
+    "bin/endurance-init.sh",
     "templates/project/models.config.json",
     "templates/project/feature_list.json.template",
     "templates/project/docker/docker-compose.yml"

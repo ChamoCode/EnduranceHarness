@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# endurance — CLI for Endurance Harness Engineering plugin
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+case "${1:-}" in
+  init) shift; exec "$SCRIPT_DIR/endurance-init.sh" init "$@" ;;
+  *)
+    echo "Usage: endurance init --name <name> --path <directory> [--force] [--git-init] [--full]"
+    echo ""
+    echo "  --full   Full mode: copies docker/, docs/, product/, tests/, init scripts."
+    echo "           Default creates only specs/, progress/ and tracking files."
+    exit 1
+    ;;
+esac
