@@ -1,0 +1,28 @@
+﻿{
+  "project": "minimal",
+  "description": "Proyecto minimal scaffoldado con R2D2-Harness plugin.",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"],
+    "valid_complexity": ["trivial", "simple", "medium", "complex", "very_complex"],
+    "sdd_required_when": "feature has \"sdd\": true"
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "example_backend_feature",
+      "title": "Ejemplo feature backend",
+      "layer": "backend",
+      "complexity": "simple",
+      "description": "Reemplaza con tu primera feature real.",
+      "acceptance": [
+        "Criterio verificable 1",
+        "tests/backend/ pasan via ./docker/scripts/product-test.sh"
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
+}

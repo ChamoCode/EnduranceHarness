@@ -1,0 +1,8 @@
+{
+  "name": "r2d2-harness",
+  "description": "Arnés SDD con agentes cooperativos, skills feature-list/model-routing y comando r2d2 init para scaffoldar proyectos.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ChamoCode"
+  }
+}

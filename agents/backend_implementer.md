@@ -2,6 +2,7 @@
 name: backend_implementer
 description: Implementa features backend en product/backend/ y tests/backend/ segun spec SDD aprobado.
 tools: Read, Write, Edit, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Implementador Backend

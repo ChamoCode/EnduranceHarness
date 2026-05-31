@@ -1,0 +1,18 @@
+---
+description: Flujo SDD con puerta humana y una feature a la vez
+alwaysApply: true
+---
+
+# Protocolo SDD
+
+```
+pending → spec_author → spec_ready → HUMANO → in_progress
+  → implementer_* / docker_manager → reviewer_* → done
+```
+
+- Maximo **una** feature en `in_progress`.
+- Spec aprobado por humano antes de codigo.
+- Verify verde (`./init.sh` o `./init.ps1`) antes de marcar `done`.
+- Trazabilidad: cada `R<n>` en requirements cubierto por test o verify documentado.
+
+Ver `docs/specs.md` para EARS y estructura de specs.

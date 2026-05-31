@@ -2,6 +2,7 @@
 name: backend_reviewer
 description: Revisor backend. Aprueba o rechaza cambios en product/backend/ y tests/backend/ sin editar codigo.
 tools: Read, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Revisor Backend

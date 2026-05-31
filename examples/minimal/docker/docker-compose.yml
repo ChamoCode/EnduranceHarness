@@ -1,0 +1,32 @@
+services:
+  harness:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.harness
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  app:
+    profiles:
+      - product
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.product
+    working_dir: /workspace
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      - ..:/workspace
+
+  test:
+    profiles:
+      - product
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.product
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    command: ["./docker/scripts/run-product-tests.sh"]

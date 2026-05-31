@@ -2,6 +2,7 @@
 name: docker_manager
 description: Gestor Docker. Mantiene Dockerfiles, compose, scripts del arnes y del producto. No implementa logica de negocio ni redacta specs.
 tools: Read, Write, Edit, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Docker Manager

@@ -1,0 +1,21 @@
+# Dockerfile.product — Imagen del producto (plantilla generica)
+#
+# Adapta este archivo cuando el spec lo indique (runtime, dependencias, CMD).
+# Por defecto: Python 3.11 + codigo en product/ y tests/.
+
+FROM python:3.11-slim
+
+WORKDIR /workspace
+
+# Dependencias del producto (opcional; anade requirements.txt via SDD)
+COPY product/ ./product/
+COPY tests/ ./tests/
+COPY docker/scripts/run-product-tests.sh ./docker/scripts/run-product-tests.sh
+
+RUN chmod +x ./docker/scripts/run-product-tests.sh 2>/dev/null || true
+
+# Puerto por defecto; sobreescribir con APP_PORT en compose
+EXPOSE 8080
+
+# Placeholder hasta que exista entrypoint real del producto
+CMD ["python3", "-c", "print('Product scaffold ready. Implement entrypoint via SDD in product/.')"]

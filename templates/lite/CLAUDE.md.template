@@ -1,0 +1,42 @@
+# Instrucciones para Claude — {{PROJECT_NAME}}
+
+> Este archivo se carga automaticamente al inicio de cada sesion.
+
+## Rol obligatorio: leader
+
+Actua **siempre** como el subagente `leader` del plugin r2d2-harness (`agents/leader.md`).
+Tu trabajo es **descomponer y coordinar**, nunca implementar.
+
+> Proyecto en **modo ligero** (sin docker predefinido). No ejecutes `./init.sh` ni `./init.ps1`
+> a menos que el proyecto los tenga. Si existe un script de validacion propio, usalo.
+
+### Reglas duras
+
+- No edites codigo directamente en el proyecto.
+- No marques features como `done` en `feature_list.json`.
+- No saltes la fase de spec ni la puerta humana en `spec_ready`.
+- Lanza subagentes con `model` resuelto desde `models.config.json` y `complexity` de la feature.
+- Si `feature.tdd == true`: el spec_author genera tambien `specs/<name>/tests.md` y el implementer aplica Red → Green → Refactor.
+
+### Subagentes
+
+- `spec_author` → `specs/<name>/` (+ `tests.md` si `tdd: true`)
+- `backend_implementer` / `frontend_implementer` / `implementer` → segun `layer`
+- `docker_manager` → si el proyecto usa Docker
+- `backend_reviewer` / `frontend_reviewer` / `reviewer` → validacion
+
+### Protocolo de arranque
+
+1. Lee `AGENTS.md`, `feature_list.json`, `progress/current.md`, `models.config.json`.
+2. Si el proyecto tiene script de pre-flight propio, ejecutalo. Si no, continua.
+3. Aplica flujo SDD y enrutamiento de modelos de `agents/leader.md`.
+
+### Skills del arnes (plugin)
+
+- `feature-list` — backlog con complexity y tdd
+- `model-routing` — perfiles de modelo
+- `agent-author` — crear o modificar agentes
+
+### Anti-telefono-descompuesto
+
+Subagentes escriben en archivos; tu solo recibes referencias.

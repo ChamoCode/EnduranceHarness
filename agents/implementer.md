@@ -2,6 +2,7 @@
 name: implementer
 description: Trabajador. Implementa UNA feature segun spec aprobado. Escribe codigo en product/, tests/ y evidencia de verificacion.
 tools: Read, Write, Edit, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Implementador

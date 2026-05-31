@@ -1,0 +1,12 @@
+{
+  "$schema_comment": "Hooks para proyectos en modo ligero (sin docker). Sin validacion de contenedor. Adapta los comandos si tu proyecto tiene script de verificacion propio.",
+  "hooks": {},
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(python3 *)",
+      "Bash(npm *)",
+      "Bash(npx *)"
+    ]
+  }
+}

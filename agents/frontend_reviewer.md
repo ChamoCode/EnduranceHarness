@@ -2,6 +2,7 @@
 name: frontend_reviewer
 description: Revisor frontend. Aprueba o rechaza cambios en product/frontend/ y tests/frontend/ sin editar codigo.
 tools: Read, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Revisor Frontend

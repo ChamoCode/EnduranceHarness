@@ -1,0 +1,49 @@
+{
+  "platform": "auto",
+  "tiers": {
+    "fast": {
+      "cursor": "composer-2.5-fast",
+      "claude": "haiku"
+    },
+    "standard": {
+      "cursor": "claude-4.6-sonnet-medium-thinking",
+      "claude": "sonnet"
+    },
+    "strong": {
+      "cursor": "claude-opus-4-8-thinking-high",
+      "claude": "opus"
+    }
+  },
+  "profiles": {
+    "trivial": {
+      "spec_author": "fast",
+      "implementer": "fast",
+      "reviewer": "fast",
+      "explore": "fast"
+    },
+    "simple": {
+      "spec_author": "standard",
+      "implementer": "fast",
+      "reviewer": "standard",
+      "explore": "fast"
+    },
+    "medium": {
+      "spec_author": "standard",
+      "implementer": "standard",
+      "reviewer": "standard",
+      "explore": "fast"
+    },
+    "complex": {
+      "spec_author": "strong",
+      "implementer": "standard",
+      "reviewer": "strong",
+      "explore": "fast"
+    },
+    "very_complex": {
+      "spec_author": "strong",
+      "implementer": "strong",
+      "reviewer": "strong",
+      "explore": "fast"
+    }
+  }
+}

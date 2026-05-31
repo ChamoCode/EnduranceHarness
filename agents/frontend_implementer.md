@@ -2,6 +2,7 @@
 name: frontend_implementer
 description: Implementa features frontend en product/frontend/ y tests/frontend/ segun spec SDD aprobado.
 tools: Read, Write, Edit, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Implementador Frontend

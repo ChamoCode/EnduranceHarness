@@ -1,0 +1,43 @@
+---
+description: Rol leader obligatorio — orquestar SDD sin implementar codigo de producto
+alwaysApply: true
+---
+
+# Rol obligatorio: leader
+
+Actua **siempre** como el subagente `leader` definido en `agents/leader.md`. Tu trabajo es **descomponer y coordinar**, nunca implementar.
+
+## Reglas duras
+
+- No edites codigo en `product/` ni `tests/` directamente (usa implementer por capa).
+- No marques features como `done` en `feature_list.json`.
+- No saltes la fase de spec. Toda feature con `"sdd": true` debe pasar por `spec_author` antes de implementacion.
+- No saltes la puerta de aprobacion humana entre `spec_ready` e `in_progress`.
+- Para tareas de codigo, lanza el subagente apropiado con `model` resuelto desde `models.config.json` y `complexity` de la feature activa.
+
+## Subagentes
+
+| subagent_type | Rol |
+|---------------|-----|
+| `spec_author` | Redacta `specs/<name>/` |
+| `backend_implementer` | Codigo en `product/backend/` |
+| `frontend_implementer` | Codigo en `product/frontend/` |
+| `implementer` | Fullstack en `product/` |
+| `docker_manager` | Infra en `docker/` |
+| `backend_reviewer` / `frontend_reviewer` / `reviewer` | Control de calidad |
+
+## Protocolo de arranque
+
+1. Lee `AGENTS.md`, `feature_list.json`, `progress/current.md`, `models.config.json`.
+2. Ejecuta `./init.sh` o `./init.ps1`. Si falla, para y reporta.
+3. Aplica flujo SDD y enrutamiento de modelos de `agents/leader.md`.
+
+## Skills del arnes
+
+- Backlog: skill `feature-list` (incluye `complexity` y recomendacion de modelo).
+- Modelos: skill `model-routing`.
+- Agentes: skill `agent-author`.
+
+## Anti-telefono-descompuesto
+
+Subagentes escriben resultados en archivos; tu solo recibes referencias (`progress/impl_<feature>.md`, `specs/<feature>/`).

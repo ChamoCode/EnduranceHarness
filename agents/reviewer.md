@@ -2,6 +2,7 @@
 name: reviewer
 description: Revisor automático. Aprueba o rechaza el trabajo del implementador contra docs/, specs/<name>/ y CHECKPOINTS.md.
 tools: Read, Glob, Grep, Bash
+model: inherit
 ---
 
 # Agente Revisor

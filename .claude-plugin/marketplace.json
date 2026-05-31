@@ -1,0 +1,13 @@
+{
+  "name": "chamocode",
+  "owner": {
+    "name": "ChamoCode"
+  },
+  "plugins": [
+    {
+      "name": "r2d2-harness",
+      "source": "./",
+      "description": "Arnés SDD con agentes cooperativos y model routing"
+    }
+  ]
+}

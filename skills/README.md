@@ -1,19 +1,17 @@
-# Skills del arnés R2D2-Harness
+# Skills del plugin R2D2-Harness
 
-Habilidades reutilizables para agentes que trabajan en esta plantilla Harness
-Engineering ([R2D2-Harness](https://github.com/ChamoCode/R2D2-Harness)). Léelas cuando el humano pida crear backlog, agentes o ampliar el
-equipo de subagentes.
+Habilidades empaquetadas en el plugin para agentes SDD.
 
 | Skill | Cuándo usarla |
 |-------|---------------|
-| [feature-list](feature-list/SKILL.md) | Crear o editar `feature_list.json`, resetear backlog tras clonar la plantilla |
-| [agent-author](agent-author/SKILL.md) | Crear o modificar agentes en `.claude/agents/`, ampliar orquestación |
+| [feature-list](feature-list/SKILL.md) | Crear o editar `feature_list.json` con `layer` y `complexity` |
+| [model-routing](model-routing/SKILL.md) | Resolver modelos por rol y complejidad desde `models.config.json` |
+| [agent-author](agent-author/SKILL.md) | Crear o modificar agentes en `agents/` |
 
 ## Cómo invocarlas
 
-En Cursor u otro agente, pide explícitamente seguir la skill:
-
 - «Usa la skill `feature-list` para definir el backlog de mi API»
-- «Usa la skill `agent-author` para crear un agente de revisión E2E»
+- «Usa la skill `model-routing` para ajustar tiers en models.config.json»
+- «Usa la skill `agent-author` para crear un agente E2E»
 
-Las skills viven en `skills/` (raíz del repo), paralelas a `docs/` y `specs/`.
+Las skills viven en `skills/` del plugin (instalado globalmente o via `--plugin-dir`).

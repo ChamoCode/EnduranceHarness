@@ -1,0 +1,31 @@
+{
+  "project": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "workflow": "lite",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "require_approved_spec_to_implement": true,
+    "valid_status": ["pending", "spec_ready", "in_progress", "done", "blocked"],
+    "valid_complexity": ["trivial", "simple", "medium", "complex", "very_complex"],
+    "sdd_required_when": "feature has \"sdd\": true",
+    "tdd_when": "feature has \"tdd\": true — spec_author genera tests.md, implementer aplica Red-Green-Refactor"
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "example_feature",
+      "title": "Ejemplo de feature",
+      "layer": "backend",
+      "complexity": "simple",
+      "tdd": false,
+      "description": "Reemplaza con tu primera feature real.",
+      "acceptance": [
+        "Criterio verificable 1",
+        "Tests pasan"
+      ],
+      "sdd": true,
+      "status": "pending"
+    }
+  ]
+}
