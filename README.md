@@ -1,3 +1,4 @@
+![Texto alternativo](img/TARSandCase.jpg)
 # Endurance Harness Engineering
 
 > *Never send a human to do a machine's job.*
