@@ -1,10 +1,11 @@
-![Texto alternativo](img/TARSandCASE.jpg)
 # Endurance Harness Engineering
 
 > *Never send a human to do a machine's job.*
 > *— TARS, Endurance mission*
 
 **[English](#english)** · **[Español](#español)**
+
+![Texto alternativo](img/TARSandCASE.jpg)
 
 ---
 
